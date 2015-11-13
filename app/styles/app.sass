@@ -1,0 +1,255 @@
+$source: #AF58DC
+$pipe: #477FE7
+$sink: #20A9D6
+$add: #32D443
+$remove: #D4401D
+
+html
+  height: 100%
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-size: 14px
+  -webkit-font-smoothing: antialiased
+  -webkit-user-select: none
+
+body
+  height: 100%
+  margin: 0
+
+  &.is-dragging
+    cursor: -webkit-grabbing
+
+@mixin rounded
+  @extend %-rounded
+%-rounded
+  border-radius: 3px
+
+@mixin graph-node($color)
+  +rounded
+  @extend %-graph-node
+  background-color: $color
+%-graph-node
+  position: absolute
+  overflow: hidden
+  color: white
+  cursor: default
+
+  &.is-dragging
+    pointer-events: none
+    z-index: 1
+    opacity: 0.65
+
+@mixin graph-node--connection--group
+  @extend %-graph-node--connection--group
+%-graph-node--connection--group
+  display: table-cell
+  padding: 0 2px 2px
+
+@mixin graph-node--connection
+  @extend %-graph-node--connection
+%-graph-node--connection
+  position: relative
+  padding: 5px 20px
+  cursor: pointer
+
+@mixin graph-node--connection--point
+  &:before
+    @extend %-graph-node--connection--point
+    @content
+  &:hover:before, &.is-dragged-over:before
+    @extend %-graph-node--connection--point--hover
+%-graph-node--connection--point
+  content: ''
+  width: 6px
+  height: 6px
+  display: block
+  position: absolute
+  top: 10px
+  border-radius: 50%
+  background-color: white
+%-graph-node--connection--point--hover
+  box-shadow: 0 0 0 4px rgba(white, 0.25)
+
+@mixin edit-node--action($color)
+  @extend %-edit-node--action
+  background-color: $color
+  &:hover
+    background-color: lighten($color, 10%)
+%-edit-node--action
+  +rounded
+  position: absolute
+  margin: 10px
+  padding: 5px 10px
+  color: white
+  font-weight: 600
+
+.graph-board
+  width: 100%
+  height: 100%
+  position: absolute
+
+.graph-board--drag-target
+  width: 100%
+  height: 100%
+  position: absolute
+
+.graph-board--select
+  position: absolute
+  background-color: rgba(gray, 0.08)
+  border: 1px solid rgba(gray, 0.18)
+  mix-blend-mode: difference
+
+  .graph-board.is-dragging-left &
+    border-style: dashed
+
+.graph-board--menu
+  +rounded
+  width: 150px
+  position: absolute
+  overflow: hidden
+
+.graph-board--menu--categories
+  padding: 5px 0 50px
+
+.graph-board--menu--category--name
+  padding: 3px 10px
+  background-color: #222
+  font-size: 12px
+  color: #CCC
+  cursor: default
+
+.graph-board--menu--option
+  padding: 5px 10px
+  display: block
+  color: white
+  text-decoration: none
+  font-weight: 400
+  background-color: #333
+
+  &:hover
+    background-color: #444
+
+.edit-node--remove
+  +edit-node--action($remove)
+  transition: transform 0.15s
+
+  .edit-node.is-dragged-over &
+    transform: scale(1.2, 1.2)
+
+.graph-node.has-inputs
+  +graph-node($sink)
+
+.graph-node.has-outputs
+  +graph-node($source)
+
+.graph-node.has-inputs.has-outputs
+  +graph-node($pipe)
+
+.graph-node--header
+  background-color: rgba(white, 0.2)
+  cursor: -webkit-grab
+
+  &:hover
+    background-color: rgba(white, 0.25)
+
+  .graph-node.is-selected &
+    color: rgba(black, 0.7)
+    background-color: rgba(white, 0.8)
+
+@mixin graph-node--header--item
+  @extend %-graph-node--header--item
+%-graph-node--header--item
+  height: 30px
+  padding: 0 8px
+  line-height: 30px
+
+.graph-node--header--name
+  +graph-node--header--item
+  display: inline-block
+  font-weight: 600
+
+.graph-node--header--destroy
+  +graph-node--header--item
+  color: white
+  text-decoration: none
+  float: right
+  font-size: 18px
+  opacity: 0
+
+  &:hover
+    background-color: rgba(white, 0.2)
+
+  .graph-node:hover &
+    opacity: 1
+
+.graph-node--number--input
+  margin: 0 8px 8px
+  padding: 3px
+  border: 0
+  background-color: rgba(black, 0.3)
+  color: white
+
+  body.is-dragging &
+    pointer-events: none
+
+.graph-node--graph--graph
+  width: 150px
+  height: 150px
+  position: relative
+  margin: 5px 10px 10px
+  background-color: rgba(black, 0.3)
+
+.graph-node--graph--position
+  width: 4px
+  height: 4px
+  position: absolute
+  margin: -2px 0 0 -2px
+  border-radius: 2px
+  background-color: white
+
+.graph-node--number-line--line
+  width: 150px
+  height: 2px
+  position: relative
+  margin: 5px 10px 15px
+  background-color: rgba(black, 0.3)
+
+.graph-node--number-line--position
+  width: 2px
+  height: 12px
+  margin-top: -5px
+  position: absolute
+  background-color: white
+
+.graph-node--connections
+  width: 100%
+  display: table
+
+.graph-node--inputs
+  +graph-node--connection--group
+
+.graph-node--outputs
+  +graph-node--connection--group
+
+.graph-node--outputs
+  text-align: right
+
+.graph-node--input
+  +graph-node--connection
+  +graph-node--connection--point
+    left: 7px
+
+.graph-node--output
+  +graph-node--connection
+  +graph-node--connection--point
+    right: 7px
+
+.graph-edge
+  width: 100vw
+  height: 100vh
+  position: absolute
+  pointer-events: none
+
+  line
+    stroke-linecap: round
+    stroke-width: 3px
+    stroke: #FFBA00

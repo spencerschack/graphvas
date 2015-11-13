@@ -1,0 +1,12 @@
+{{drag-target
+  on-drag-start="startSelect" on-drag="select"
+  on-drag-end="endSelect" on-click="clear"
+  on-context-menu="showMenu"
+  class="graph-board--drag-target"}}
+{{yield (action "position")}}
+{{#if isDragging}}
+  {{graph-board/select rect=selectRect}}
+{{/if}}
+{{#if showMenu}}
+  {{graph-board/menu position=menuPosition on-add-node="addNode"}}
+{{/if}}

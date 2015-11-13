@@ -1,0 +1,8 @@
+{{#graph-board graph=model as |position|}}
+  {{#each model.nodes as |node|}}
+    {{component node.name node=node on-position=position}}
+  {{/each}}
+  {{#each model.edges as |edge|}}
+    {{graph-edge edge=edge}}
+  {{/each}}
+{{/graph-board}}

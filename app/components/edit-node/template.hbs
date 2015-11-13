@@ -1,0 +1,50 @@
+{{#if isDropTarget}}
+  <div class="edit-node--remove">
+    Remove
+  </div>
+{{else}}
+  <div class="edit-node--add">
+    <div class="edit-node--add--button">
+      Add Node
+    </div>
+    <div class="edit-node--add--menu">
+      <div class="edit-node--add--category">
+        <div class="edit-node--add--category--name">Sources</div>
+        <div class="edit-node--add--category--list">
+          <a {{action "addNode" "graph-node/number"}} href="" 
+            class="edit-node--add--option">Number</a>
+          <a {{action "addNode" "graph-node/clock"}} href="" 
+            class="edit-node--add--option">Clock</a>
+          <a {{action "addNode" "graph-node/circle"}} href="" 
+            class="edit-node--add--option">Circle</a>
+        </div>
+      </div>
+      <div class="edit-node--add--category">
+        <div class="edit-node--add--category--name">Functions</div>
+        <div class="edit-node--add--category--list">
+          <a {{action "addNode" "graph-node/add"}} href="" 
+            class="edit-node--add--option">Add</a>
+          <a {{action "addNode" "graph-node/multiply"}} href="" 
+            class="edit-node--add--option">Multiply</a>
+          <a {{action "addNode" "graph-node/divide"}} href="" 
+            class="edit-node--add--option">Divide</a>
+          <a {{action "addNode" "graph-node/sine"}} href="" 
+            class="edit-node--add--option">Sine</a>
+          <a {{action "addNode" "graph-node/cosine"}} href="" 
+            class="edit-node--add--option">Cosine</a>
+        </div>
+      </div>
+      <div class="edit-node--add--category">
+        <div class="edit-node--add--category--name">Displays</div>
+        <div class="edit-node--add--category--list">
+          <a {{action "addNode" "graph-node/number-line"}} href="" 
+            class="edit-node--add--option">Number Line</a>
+          <a {{action "addNode" "graph-node/graph"}} href="" 
+            class="edit-node--add--option">Graph</a>
+          <a {{action "addNode" "graph-node/canvas"}} href="" 
+            class="edit-node--add--option">Canvas</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}

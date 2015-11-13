@@ -1,0 +1,22 @@
+{{#drag-target
+  on-drag-start="startPosition" on-drag="position"
+  on-drag-end="endPosition" on-mouse-down="select"
+  class="graph-node--header"}}
+    <span class="graph-node--header--name">{{name}}</span>
+    <a {{action "destroy"}} href="" class="graph-node--header--destroy">
+      &times;
+    </a>
+{{/drag-target}}
+<div class="graph-node--connections">
+  <div class="graph-node--inputs">
+    {{#each inputs as |inpoot|}}
+      {{graph-node/input node=node input=inpoot}}
+    {{/each}}
+  </div>
+  <div class="graph-node--outputs">
+    {{#each outputs as |output|}}
+      {{graph-node/output node=node output=output}}
+    {{/each}}
+  </div>
+</div>
+{{yield}}
