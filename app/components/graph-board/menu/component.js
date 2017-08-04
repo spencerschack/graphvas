@@ -4,6 +4,8 @@ import on from 'ember-evented/on';
 
 export default Component.extend({
 
+  classNames: ['graph-board--menu'],
+
   updatePosition: on('didInsertElement', function() {
     const {x, y} = get(this, 'position');
     this.$()
@@ -11,16 +13,12 @@ export default Component.extend({
       .css('left', x + 'px');
   }),
 
-  preventContextMenu: on('contextMenu', function(event) {
-    event.preventDefault();
-  }),
-
   actions: {
-    
+
     select(name) {
       this.sendAction('on-add-node', {name, ...get(this, 'position')})
     }
-  
+
   }
 
 });

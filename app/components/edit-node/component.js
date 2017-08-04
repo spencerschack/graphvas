@@ -11,6 +11,8 @@ export default Component.extend(
   Droppable,
 {
 
+  classNames: ['edit-node'],
+
   store: service(),
 
   isDropTarget: detectInstance(Node, 'dragCoordinator.draggedObject'),
@@ -20,12 +22,12 @@ export default Component.extend(
   },
 
   actions: {
-    
+
     addNode(name) {
       const graph = get(this, 'graph');
       get(this, 'store').createRecord('node', {graph, name}).save();
     }
-  
+
   }
 
 });

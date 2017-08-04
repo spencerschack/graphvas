@@ -22,6 +22,7 @@ function intersects(rect) {
 
 export default Component.extend({
 
+  classNames: ['graph-board'],
   classNameBindings: ['isDragging',
     'isDraggingLeft:is-dragging-left:is-dragging-right'],
 
@@ -72,7 +73,7 @@ export default Component.extend({
   }),
 
   actions: {
-    
+
     position(component) {
       const rect = component.element.getBoundingClientRect();
       get(this, 'board').set(get(component, 'node'), rect);
@@ -107,7 +108,7 @@ export default Component.extend({
       get(this, 'store').createRecord('node', {graph, ...attrs}).save();
       set(this, 'showMenu', false);
     }
-  
+
   }
 
 });

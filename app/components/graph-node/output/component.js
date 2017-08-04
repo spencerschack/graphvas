@@ -13,6 +13,8 @@ export default Component.extend(
   Droppable,
 {
 
+  classNames: ['graph-node--output'],
+
   store: service(),
 
   attributeBindings: ['output:data-output'],

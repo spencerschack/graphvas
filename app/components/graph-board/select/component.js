@@ -4,6 +4,8 @@ import observer from 'ember-metal/observer';
 
 export default Component.extend({
 
+  classNames: ['graph-board--select'],
+
   updateSizeAndPosition: observer('rect', function() {
     const {top, right, bottom, left} = get(this, 'rect');
     this.$()

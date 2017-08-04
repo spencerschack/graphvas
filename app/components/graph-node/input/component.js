@@ -13,6 +13,8 @@ export default Component.extend(
   Droppable,
 {
 
+  classNames: ['graph-node--input'],
+
   store: service(),
 
   edge: computed('node.inputs.[]', 'input', function() {

@@ -1,10 +1,15 @@
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+/* eslint-env node */
+'use strict';
+
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
+  let app = new EmberApp(defaults, {
     babel: {
-      stage: 0
+      plugins: [
+        'transform-function-bind',
+        'transform-object-rest-spread'
+      ]
     },
     sassOptions: {
       extension: 'sass'

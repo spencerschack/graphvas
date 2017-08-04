@@ -8,9 +8,15 @@ import {
 
 export default Component.extend({
 
+  classNames: ['drag-target'],
+
+  handleContextMenu: on('contextMenu', function(event) {
+    event.preventDefault();
+    this.sendAction('on-context-menu', event);
+  }),
+
   handleMouseDown: on('mouseDown', function(event) {
     if(event.which === 3) {
-      this.sendAction('on-context-menu', event);
       return;
     }
     this.sendAction('on-mouse-down', event);
