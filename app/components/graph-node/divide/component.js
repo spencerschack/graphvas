@@ -10,6 +10,7 @@ export default Node.extend({
   outputs: ['quotient'],
 
   quotient: computed('dividend', 'divisor', function() {
+    console.log(get(this, 'dividend'));
     return get(this, 'dividend') / get(this, 'divisor');
   }),
 
